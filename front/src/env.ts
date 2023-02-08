@@ -1,16 +1,15 @@
-export const MYSERVER_URL = 'http://127.0.0.1:8000/';
+export const MYSERVER_URL = 'http://127.0.0.1:8001/';
 
 export class Student{
     firstName:string = "";
     lastName:string = "";
-    sId: number = 0;
-    uId: number = 0;
+    user: number = 0;
+    id: number = 0;
 
-    constructor(firstName:string, lastName:string, sId: number, uId: number){
+    constructor(firstName:string, lastName:string, uId: number){
         this.firstName = firstName;
         this.lastName = lastName;
-        this.sId = sId;
-        this.uId = uId;
+        this.user = uId;
     }
 }
 

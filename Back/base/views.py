@@ -52,6 +52,7 @@ class MyStudentsView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
    
     def delete(self, request, pk):
-        my_model = Students.objects.get(pk=pk)
+        usr = request.user
+        my_model = usr.students_set.get(pk=pk)
         my_model.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)

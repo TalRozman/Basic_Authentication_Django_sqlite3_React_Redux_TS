@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState, AppThunk } from '../../app/store';
 import { Student, User } from '../../env';
-import { getStudents, userLogin } from './loginAPI';
+import {getStudents, userLogin } from './loginAPI';
 
 export interface logInState {
   accessToken: string;
@@ -30,27 +30,6 @@ export const getStudentsAsync = createAsyncThunk(
     return response;
   }
 );
-// export const loginAsync = createAsyncThunk(
-//   'login/login',
-//   async (user: User) => {
-//     const response = await userLogin(user);
-//     return response;
-//   }
-// );
-// export const loginAsync = createAsyncThunk(
-//   'login/login',
-//   async (user: User) => {
-//     const response = await userLogin(user);
-//     return response;
-//   }
-// );
-// export const loginAsync = createAsyncThunk(
-//   'login/login',
-//   async (user: User) => {
-//     const response = await userLogin(user);
-//     return response;
-//   }
-// );
 
 export const loginSlice = createSlice({
   name: 'login',
@@ -72,6 +51,7 @@ export const loginSlice = createSlice({
       })
       .addCase(getStudentsAsync.fulfilled, (state, action) => {
         state.students = action.payload;
+        console.log(state.students)
       })
   },
 });
@@ -80,8 +60,7 @@ export const { logout } = loginSlice.actions;
 
 export const selectToken = (state: RootState) => state.login.accessToken;
 export const selectStudents = (state: RootState) => state.login.students;
-export const selectRefresh = (state: RootState) => state.login.logged;
+export const selectLogged = (state: RootState) => state.login.logged;
 export const selectError = (state: RootState) => state.login.error;
-
 
 export default loginSlice.reducer;

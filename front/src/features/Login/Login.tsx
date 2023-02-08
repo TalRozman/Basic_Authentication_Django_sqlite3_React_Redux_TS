@@ -2,33 +2,26 @@ import React, { useEffect, useState } from 'react';
 
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
 import { Student, User } from '../../env';
-import { getStudentsAsync, loginAsync, logout, selectError, selectRefresh, selectStudents, selectToken } from './loginSlice';
+import StudentComp from '../Student/StudentComp';
+import { addStudentAsync, delStudentAsync, selectRefresh } from '../Student/studentSlicer';
+import { getStudentsAsync, loginAsync, logout, selectError, selectLogged, selectStudents, selectToken } from './loginSlice';
 
 export const Login = () => {
-  const logged = useAppSelector(selectRefresh);
-  const students = useAppSelector(selectStudents);
+  const logged = useAppSelector(selectLogged);
   const error = useAppSelector(selectError);
   const token = useAppSelector(selectToken);
+  const refresh = useAppSelector(selectRefresh);
   const dispatch = useAppDispatch();
   const [userName, setuserName] = useState("")
   const [password, setpassword] = useState("")
 
   useEffect(() => {
     dispatch(getStudentsAsync(token))
-  }, [dispatch,logged])
-  
+  }, [dispatch,logged,refresh])
+
   return (
     <div>
-      {logged ?
-        <>
-          {students.map((stud, i) =>
-            <div key={i}>
-              First Name - {stud?.firstName}<br />
-              Last Name - {stud?.lastName}
-            </div>
-          )}
-          <br /><button onClick={() => dispatch(logout())}>Log Out</button>
-        </> : <>
+      {logged ? <StudentComp/> : <>
           <label>
             Username: {" "}
             <input onKeyUp={(e) => setuserName(e.currentTarget.value)} />

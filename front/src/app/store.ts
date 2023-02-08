@@ -1,9 +1,11 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
-import { loginSlice } from '../features/Students/loginSlice';
+import { loginSlice } from '../features/Login/loginSlice';
+import { studentSlice } from '../features/Student/studentSlicer';
 
 export const store = configureStore({
   reducer: {
     login: loginSlice.reducer,
+    student:studentSlice.reducer,
   },
 });
 

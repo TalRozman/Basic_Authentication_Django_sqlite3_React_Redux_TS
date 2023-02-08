@@ -18,6 +18,7 @@ from django.urls import path
 
 urlpatterns = [
     path('student/',views.MyStudentsView.as_view()),
+    path('student/<pk>',views.MyStudentsView.as_view()),
     path('', views.index ),
     path('login/', views.MyTokenObtainPairView.as_view()),
 ]
